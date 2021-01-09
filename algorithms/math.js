@@ -4,7 +4,6 @@
  */ 
 function fibonacci(n) {
     let group = [1, 1]; // 1
-
     for (let i = 0; i < n - 2; i++) {   // 1
         const value = group[i] + group[i +  1]; // n - 1
         group.push(value);  // n - 1
@@ -43,7 +42,6 @@ console.log("fibonacci", fibonacci(10));
   */
  function getSmallest(numbers) {
     let currentMin = numbers[0];    // 1
-
     for (const num of numbers) {    // 1
         if (num < currentMin) { // n
             currentMin = num;   // 0 (Best case), n(worst case), n(avg.case)
@@ -87,7 +85,7 @@ console.log("fibonacci", fibonacci(10));
      }
  }
 // best case: n = 14 => O(1)
-// worst case: n = 2^50 => 50 => O(log n)
+// worst case: n = 2^50 => 50 => O(log n) => Logarithmic Time Complexity
 console.log('isPowerOfTwo', isPowerOfTwo(100), isPowerOfTwo(16), isPowerOfTwo(Math.pow(2,50)));
 /* [ Bitwise Operators ] 
     2   00010
@@ -109,3 +107,29 @@ console.log('isPowerOfTwo', isPowerOfTwo(100), isPowerOfTwo(16), isPowerOfTwo(Ma
  }
 // O(1)
 console.log('withBitwiseOperator', withBitwiseOperator(100), withBitwiseOperator(Math.pow(2,5)));
+
+/**
+ * Q) Caculate the factorial of a number.
+ * fact(3); // 3 * 2 * 1 = 6
+ * fact(5); // 5 * 4 * 3 * 2 * 1 = 120
+ */
+function fact(n) {
+    let sum = 1;
+    for (let i = 2; i <= n; i++) {
+        sum *= i;
+    }
+    return sum;
+}
+// O(n)
+console.log('fact', fact(5));
+/* Recursion */
+function factorial(n) {
+    if ( n <= 1 ) { // 1
+        return 1;   // 1
+    } else {
+        return n * factorial(n - 1); // 1 
+    }
+}
+// 5 * ( 4 * ( 3 * ( 2 * ( 1 ))))
+// n * O(1) => O(n)
+console.log('factorial', factorial(5));
