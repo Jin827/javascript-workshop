@@ -86,6 +86,25 @@ console.log("fibonacci", fibonacci(10));
         return true;    
      }
  }
+/* [ Bitwise Operators ] 
+    2   00010
+    4   00100
+    8   01000
+    16  10000
+------------------------------------------------------------
+  4   0010        4   0010        8   1000        16   10000
+& 8   0100      & 7   0111      & 7   0111      & 15   01111
+----------      ----------      ----------      ------------
+      0000            0010            0000             00000
+*/
+ function withBitwiseOperator(n) {
+     if (n < 1) {
+         return false;
+     } else {
+         return (n & n - 1) === 0;
+     }
+ }
  // best case: n = 14 => O(1)
  // worst case: n = 2^50 => 50 => O(log n)
 console.log('isPowerOfTwo', isPowerOfTwo(100), isPowerOfTwo(16), isPowerOfTwo(Math.pow(2,50)));
+console.log('withBitwiseOperator', withBitwiseOperator(100), withBitwiseOperator(Math.pow(2,5)));
