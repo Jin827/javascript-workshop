@@ -24,14 +24,19 @@ console.log("fibonacci", fibonacci(10));
  */
 
  function primeNumber(n) {
-    for (let i = 2; i < n; i++) {   // 1
-        if (n % i === 0) {  // n - 1
-            return false; // n - 1
+    if (n <= 1) { 
+        return false;   
+    } else {
+        for (let i = 2; i < Math.sqrt(n); i++) {   // 1
+            if (n % i === 0) {  // n
+                return false; // 1
+            }
         }
+        return true;
     }
-    return true; // 1
+    
  }
- // T = 2 + 2 * (n - 1) = 2n
- // => O(n) => Linear Time Complexity
- console.log("primeNumber", primeNumber(5));
- console.log("primeNumber", primeNumber(9));
+ // Best case: n = 1 or n = 2 => O(1) => Constant Time Complexity
+ // Average case: n = 126 => O(n) => Linear Time Complexity
+ // Worst case: n = 27,277 => Improved : O(sqrt(n)) 
+ console.log("primeNumber", primeNumber(1), primeNumber(2), primeNumber(5), primeNumber(9), primeNumber(27277));
