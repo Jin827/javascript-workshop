@@ -55,7 +55,7 @@ function dynamicFib(n, memo) {
     return result;
 }
 // T = 2n => O(n)
-console.log('dynamicFib', dynamicFib(30, {}), counter);
+console.log('dynamicFib', dynamicFib(10, {}), counter);
 counter = 0;
 
 
