@@ -4,14 +4,16 @@
  */ 
 
 function fibonacci(n) {
-    let group = [1, 1];
+    let group = [1, 1]; // 1
 
-    for (let i = 0; i < n - 2; i++) {
-        const value = group[i] + group[i +  1];
-        group.push(value);
+    for (let i = 0; i < n - 2; i++) {   // 1
+        const value = group[i] + group[i +  1]; // n - 1
+        group.push(value);  // n - 1
     };
 
-    return group;
+    return group;   // 1
 }
+// T = 1 + 1 + 1 + 2 * (n - 1) = 3 + 2n - 2 = 2n + 1
+// => O(n) => Linear Time Complexity
 
 console.log("fibonacci", fibonacci(10));
