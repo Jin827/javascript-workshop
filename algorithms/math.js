@@ -2,6 +2,7 @@
  * Q) return the nth element of the Fibonacci sequence.
  * [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144,...]
  */ 
+/* with Bottom-Up Approach */
 function fibonacci(n) {
     let group = [1, 1]; // 1
     for (let i = 0; i < n - 1; i++) {   // 1
