@@ -4,15 +4,31 @@
  */ 
 function fibonacci(n) {
     let group = [1, 1]; // 1
-    for (let i = 0; i < n - 2; i++) {   // 1
+    for (let i = 0; i < n - 1; i++) {   // 1
         const value = group[i] + group[i +  1]; // n - 1
         group.push(value);  // n - 1
     };
-    return group;   // 1
+    return group[n];   // 1
 }
 // T = 1 + 1 + 1 + 2 * (n - 1) = 3 + 2n - 2 = 2n + 1
 // => O(n) => Linear Time Complexity
 console.log("fibonacci", fibonacci(10));
+/* with Recursion */
+let counter = 0;
+function fib(n) {   
+    counter++ 
+    if (n === 0 || n === 1) {
+        return 1;
+    } else {
+        return fib(n - 1) + fib(n - 2);
+    }
+}
+// O(2^n) => Exponential Time Complexity => Recursion is Not always best!
+console.log('fib', fib(20), counter);
+counter = 0;
+console.log('fib', fib(30), counter);
+counter = 0;
+
 
 /**
  * Q) Determine whether an input number is a prime number(소수).
@@ -37,6 +53,7 @@ console.log("fibonacci", fibonacci(10));
  // Worst case: n = 27,277 => Improved : O(sqrt(n)) 
  console.log("primeNumber", primeNumber(1), primeNumber(2), primeNumber(5), primeNumber(9), primeNumber(27277));
 
+
  /**
   * Q) Take an array of numbers as input and return the minimum value in the array. (i.e. the smallest number)
   */
@@ -55,6 +72,7 @@ console.log("fibonacci", fibonacci(10));
  // O(n²)
  console.log('getSmallest', getSmallest([4,39,2,50]));
 
+
  /**
   * Q) Take a number as input and return 'true' if it's an even number. 'false' for odd number.
   */
@@ -63,6 +81,7 @@ console.log("fibonacci", fibonacci(10));
  }
  // O(1)
  console.log('isEvenNumber', isEvenNumber(4), isEvenNumber(5));
+
 
  /**
   * Q) Determine whether an input if a power of two(2^n).
@@ -87,7 +106,7 @@ console.log("fibonacci", fibonacci(10));
 // best case: n = 14 => O(1)
 // worst case: n = 2^50 => 50 => O(log n) => Logarithmic Time Complexity
 console.log('isPowerOfTwo', isPowerOfTwo(100), isPowerOfTwo(16), isPowerOfTwo(Math.pow(2,50)));
-/* [ Bitwise Operators ] 
+/* with Bitwise Operators ] 
     2   00010
     4   00100
     8   01000
@@ -108,6 +127,7 @@ console.log('isPowerOfTwo', isPowerOfTwo(100), isPowerOfTwo(16), isPowerOfTwo(Ma
 // O(1)
 console.log('withBitwiseOperator', withBitwiseOperator(100), withBitwiseOperator(Math.pow(2,5)));
 
+
 /**
  * Q) Caculate the factorial of a number.
  * fact(3); // 3 * 2 * 1 = 6
@@ -122,7 +142,7 @@ function fact(n) {
 }
 // O(n)
 console.log('fact', fact(5));
-/* Recursion */
+/* with Recursion */
 function factorial(n) {
     if ( n <= 1 ) { // 1
         return 1;   // 1
