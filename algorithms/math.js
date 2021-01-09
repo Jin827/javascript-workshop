@@ -13,20 +13,48 @@ function fibonacci(n) {
 // T = 1 + 1 + 1 + 2 * (n - 1) = 3 + 2n - 2 = 2n + 1
 // => O(n) => Linear Time Complexity
 console.log("fibonacci", fibonacci(10));
+
 /* with Recursion */
 let counter = 0;
-function fib(n) {   
+function recursiveFib(n) {   
     counter++ 
     if (n === 0 || n === 1) {
         return 1;
     } else {
-        return fib(n - 1) + fib(n - 2);
+        return recursiveFib(n - 1) + recursiveFib(n - 2);
     }
 }
 // O(2^n) => Exponential Time Complexity => Recursion is Not always best!
-console.log('fib', fib(20), counter);
+console.log('recursiveFib', recursiveFib(20), counter);
 counter = 0;
-console.log('fib', fib(30), counter);
+console.log('recursiveFib', recursiveFib(30), counter);
+counter = 0;
+
+/* with Dynamic Programming 
+ = Recursion + Stored Data(Memorization)
+ => avoid unnecessary recursive steps by storing data. (avoid duplicated work.)
+ => intermediate results are stored and re-used.
+*/
+function dynamicFib(n, memo) {
+    let result;
+    counter++;
+
+    if (memo[n]) {
+        // if memo already has 'n' value, do not execute 'dynamicFib()' again. 
+        return memo[n];
+    }
+    if (n === 0 || n === 1) {
+        result = 1;
+    } else {
+        result = dynamicFib(n - 1, memo) + dynamicFib(n - 2, memo);
+    }
+    memo[n] = result;
+
+    console.log('memo',result, memo)
+    return result;
+}
+// T = 2n => O(n)
+console.log('dynamicFib', dynamicFib(30, {}), counter);
 counter = 0;
 
 
@@ -106,6 +134,7 @@ counter = 0;
 // best case: n = 14 => O(1)
 // worst case: n = 2^50 => 50 => O(log n) => Logarithmic Time Complexity
 console.log('isPowerOfTwo', isPowerOfTwo(100), isPowerOfTwo(16), isPowerOfTwo(Math.pow(2,50)));
+
 /* with Bitwise Operators ] 
     2   00010
     4   00100
@@ -142,6 +171,7 @@ function fact(n) {
 }
 // O(n)
 console.log('fact', fact(5));
+
 /* with Recursion */
 function factorial(n) {
     if ( n <= 1 ) { // 1
