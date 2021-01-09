@@ -65,3 +65,27 @@ console.log("fibonacci", fibonacci(10));
  }
  // O(1)
  console.log('isEvenNumber', isEvenNumber(4), isEvenNumber(5));
+
+ /**
+  * Q) Determine whether an input if a power of two(2^n).
+  * isPowerOfTwo(8); // true
+  * isPowerOfTwo(5); // false
+  */
+ function isPowerOfTwo(n) {
+     if (n < 1) {
+         return false;
+     } else {
+        let devided = n;    
+        while (devided !== 1) {
+            if (devided % 2 !== 0) {  
+                return false;
+            } else {
+                devided = devided / 2;  
+            }
+        }
+        return true;    
+     }
+ }
+ // best case: n = 14 => O(1)
+ // worst case: n = 2^50 => 50 => O(log n)
+console.log('isPowerOfTwo', isPowerOfTwo(100), isPowerOfTwo(16), isPowerOfTwo(Math.pow(2,50)));
