@@ -86,6 +86,9 @@ console.log("fibonacci", fibonacci(10));
         return true;    
      }
  }
+// best case: n = 14 => O(1)
+// worst case: n = 2^50 => 50 => O(log n)
+console.log('isPowerOfTwo', isPowerOfTwo(100), isPowerOfTwo(16), isPowerOfTwo(Math.pow(2,50)));
 /* [ Bitwise Operators ] 
     2   00010
     4   00100
@@ -104,7 +107,5 @@ console.log("fibonacci", fibonacci(10));
          return (n & n - 1) === 0;
      }
  }
- // best case: n = 14 => O(1)
- // worst case: n = 2^50 => 50 => O(log n)
-console.log('isPowerOfTwo', isPowerOfTwo(100), isPowerOfTwo(16), isPowerOfTwo(Math.pow(2,50)));
+// O(1)
 console.log('withBitwiseOperator', withBitwiseOperator(100), withBitwiseOperator(Math.pow(2,5)));
