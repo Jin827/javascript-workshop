@@ -51,7 +51,6 @@ function dynamicFib(n, memo) {
     }
     memo[n] = result;
 
-    console.log('memo',result, memo)
     return result;
 }
 // T = 2n => O(n)
