@@ -1,9 +1,7 @@
 let count = 0;
 
-/**
- * [ Linear Search Algorithm ]
- */
-function findElement(arr, element) {
+/* Linear Search Algorithm */
+function linearSearch(arr, element) {
     let index = 0;
     for (const item of arr) {
         count++;
@@ -15,14 +13,14 @@ function findElement(arr, element) {
 }
 
 const arr = [5, 4, 20, -10, 33, 51];
-console.log('findElement', findElement(arr, 20), count);
+console.log('linearSearch', linearSearch(arr, 20), count);
 count = 0;
 
 const obj = [
     { name: 'ji', age: '18'},
     { name: 'ah', age: '32'}
 ];
-console.log('findElement', findElement(obj, { name: 'ji', age: '18'}));
+console.log('linearSearch', linearSearch(obj, { name: 'ji', age: '18'}));
 /**
  * => undefined.
  * why ? Objects are reference values in javaScript.
@@ -34,14 +32,14 @@ const object = [
     person,
     { name: 'ah', age: '32'}
 ];
-console.log('findElement', findElement(object, person));
+console.log('linearSearch', linearSearch(object, person));
 /**
  * => 0
  * why ? Because the person object is only defined once.
  * so now we are dealing with exact same object in memory.
  */    
 
-function findIndex(objects, element, comparatorFn) {
+function linearSearch_Complete(objects, element, comparatorFn) {
     let index = 0;
 
     for (const item of objects) {
@@ -64,10 +62,38 @@ function comparatorFn(element, item) {
     return element.name === item.name && element.age === item.age;
 }
 
-console.log('findIndex', findIndex(obj, { name: 'ji', age: '20'}, comparatorFn)); // 0 
+console.log('linearSearch_Complete', linearSearch_Complete(obj, { name: 'ji', age: '18'}, comparatorFn)); // 0 
 /**
- * Time Complexity
  * Best: the item's at the beginning -> O(1)
  * Ave : random order, we don't know where the item is -> Tends to be O(n)
  * Worst: the item's at the end -> O(n)
+ */
+
+
+/* Binary Search Algorithm */
+function binarySearch(sortedArr, element) {
+   let startIdx = 0;
+   let endIdx = sortedArr.length - 1;
+   
+   while (startIdx <= endIdx) {
+        const middleIdx = startIdx + Math.floor((endIdx - startIdx) / 2);
+
+        if (sortedArr[middleIdx] === element) {
+            return middleIdx;
+        }
+
+        if (sortedArr[middleIdx] < element) {
+            startIdx = middleIdx + 1;
+        } else {
+            endIdx = middleIdx - 1;
+        }     
+   }
+}
+
+const sortedArr = [1, 5, 9, 13, 99, 100];
+console.log('binarySearch', binarySearch(sortedArr, 99));
+/**
+ * Best: the item's right in the middle -> O(1)
+ * Ave : we don't know where the item is -> Tends to be O(log n)
+ * Worst: the item's at the beginning or end -> O(log n)
  */
