@@ -101,6 +101,7 @@ console.log('binarySearch', binarySearch(sortedArr, 99));
 
 /* Recursive Binary Search */
 function recursiveBinarySearch(sortedArr, element, offset) {
+    // outside of recursion: O(1)
     let startIdx = 0;
     let endIdx = sortedArr.length - 1;
     const middleIdx = startIdx + Math.floor((endIdx - startIdx) / 2);
@@ -116,7 +117,15 @@ function recursiveBinarySearch(sortedArr, element, offset) {
         offset = offset + middleIdx + 1; // 'middleIdx + 1' 는 middleIdx 까지의 갯수(length)를 구하기 위함.
     } else {
         endIdx = middleIdx - 1;
-    }    
+    } 
+    // inside of recursion: O(1)   
     return recursiveBinarySearch(sortedArr.slice(startIdx, endIdx + 1), element, offset);
  }
  console.log('recursiveBinarySearch', recursiveBinarySearch(sortedArr, 99, 0));
+ /**
+  * a = 1(search function itself is called once), b = 2(array's always split in half)
+  * O(n^logb a) => O(n^log2 1) => O(n^0) => O(1) 
+  * 
+  * Overall algorithm time complexity(same work inside and outside of recursion):
+  * O(n^logb a * log n) => O(1 * log n) => O(log n)
+  */
