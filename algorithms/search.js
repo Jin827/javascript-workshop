@@ -6,6 +6,7 @@ const obj = [
     { name: 'ji', age: '18' },
     { name: 'ah', age: '32' }
 ];
+
 function linearSearch(arr, element) {
     let index = 0;
     for (const item of arr) {
@@ -123,9 +124,9 @@ function recursiveBinarySearch(sortedArr, element, offset) {
 }
 console.log('recursiveBinarySearch', recursiveBinarySearch(sortedArr, 99, 0));
  /**
- * a = 1(search function itself is called once), b = 2(array's always split in half)
- * O(n^logb a) => O(n^log2 1) => O(n^0) => O(1)
- *
- * Overall algorithm time complexity(same work inside and outside of recursion):
- * O(n^logb a * log n) => O(1 * log n) => O(log n)
- */
+* a = 1(search function itself is called once), b = 2(array's always split in half)
+* O(n^logb a) => O(n^log2 1) => O(n^0) => O(1)
+*
+* Overall algorithm time complexity(same work inside and outside of recursion):
+* O(n^logb a * log n) => O(1 * log n) => O(log n)
+*/
