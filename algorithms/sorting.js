@@ -1,7 +1,7 @@
 /**
  * Compare tow items at a time and sort them. Go through the entire sorted multiple times until all pairs were compared and sorted.
  */
-const array = [3, 10, -3, 48, 5, 3, -10, 56, 78, 33];
+const array = [3, 10, -3, 48, 5];
 
 function validation(sorted) {
     let test = [];
@@ -105,9 +105,51 @@ function quickSort(arr) {
     return smallerElementsSortedArray.concat(centerElementsArray, biggerElementsSortedArray);
 }
 console.log('quickSort', quickSort(array));
-// Recursive Step Runtime: O(n^logb(a)) => O(n^log2(2)) => O(n^1) => O(n)
-// Runtime Outside of the Recursion: O(n)
-// Algorithm Runtime: O(n^logb(a) * log n) => O(n * log n)
+// Recursive Step Time Complexity: O(n^logb(a)) => O(n^log2(2)) => O(n^1) => O(n)
+// Time Complexity Outside of the Recursion: O(n)
+// Algorithm Time Complexity: O(n^logb(a) * log n) => O(n * log n)
 
 // best, ave: O(n * log n)
 // worst: O(n^2)
+
+/**
+ * [ Merge Sort ]
+ * Split array multiple times until we have only 2-emelemt arrays left.
+ * - sort those arrays and merge them back together.
+ */
+function mergeSort(arr) {
+    if (arr.length < 2) {
+        return arr;
+    }
+    if (arr.length === 2) {
+        return arr[0] > arr[1] ? [arr[1], arr[0]] : arr;
+    }
+    // arr.length > 2 => split arrays
+    const middle = Math.floor(arr.length / 2);
+    const leftArray = arr.slice(0, middle);
+    const rightArray = arr.slice(middle);
+    // recursive splitting
+    const leftSortedArray = mergeSort(leftArray);
+    const rightSortedArray = mergeSort(rightArray);
+
+    // when all arrays are split into 1 or 2 length
+    // sort and merge them
+    const mergedArr = [];
+    let leftArrIndex = 0;
+    let rightArrIndex = 0;
+
+    while (leftArrIndex < leftSortedArray.length || rightArrIndex < rightSortedArray.length) {
+        // when leftArray length is smaller than rightArray length
+        // => leftArrIndex >= leftSortedArray.length
+        if (leftArrIndex >= leftSortedArray.length || leftSortedArray[leftArrIndex] > rightSortedArray[rightArrIndex]) {
+            mergedArr.push(rightSortedArray[rightArrIndex]);
+            rightArrIndex++;
+        } else {
+            mergedArr.push(leftSortedArray[leftArrIndex]);
+            leftArrIndex++;
+        }
+    }
+    return mergedArr;
+}
+console.log('mergeSort', mergeSort(array));
+// O(n * log n)
