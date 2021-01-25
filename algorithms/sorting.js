@@ -1,7 +1,7 @@
 /**
  * Compare tow items at a time and sort them. Go through the entire sorted multiple times until all pairs were compared and sorted.
  */
-const array = [3, 10, -3, 48, 5, 2, 33];
+const array = [3, 10, -3, 48, 5, 3, -10, 56, 78, 33];
 
 function validation(sorted) {
     let test = [];
@@ -24,7 +24,7 @@ function validation(sorted) {
     }
 }
 
-function simpleSorting(array) {
+function simpleSort(array) {
     let sorted = [...array];
     let isSorted = false;
 
@@ -43,10 +43,9 @@ function simpleSorting(array) {
     }
     return sorted;
 }
+console.log('simpleSort', simpleSort(array));
 
-console.log('simpleSorting', simpleSorting(array));
-
-function sort(array) {
+function bubbleSort(array) {
     const resultArray = [...array];
 
     for (let outer = 0; outer < resultArray.length; outer++) {
@@ -67,8 +66,48 @@ function sort(array) {
 
     return resultArray;
 }
-
-console.log("sort", sort(array));
+console.log("bubbleSort", bubbleSort(array));
 // best: O(n)
 // ave, worst: O(n^2)
 
+/**
+ * [ Quick Sort using Recursion ]
+ * Use pivot elements to split array into smaller chunks - elements bigger, smaller and equal than the pivot element.
+ * Repeat that process for all chunks and concat the sorted chunks.
+ */
+function quickSort(arr) {
+    const copiedArray = [...arr];
+
+    if (copiedArray.length <= 1) {
+        return copiedArray;
+    }
+
+    const smallerElementsArray = [];
+    const biggerElementsArray = [];
+    const pivotElement = copiedArray.shift();
+    const centerElementsArray = [pivotElement];
+
+    while (copiedArray.length) {
+        const currentElement = copiedArray.shift();
+
+        if (currentElement === pivotElement) {
+            centerElementsArray.push(currentElement);
+        } else if (currentElement < pivotElement) {
+            smallerElementsArray.push(currentElement);
+        } else {
+            biggerElementsArray.push(currentElement);
+        }
+    }
+
+    const smallerElementsSortedArray = quickSort(smallerElementsArray);
+    const biggerElementsSortedArray = quickSort(biggerElementsArray);
+
+    return smallerElementsSortedArray.concat(centerElementsArray, biggerElementsSortedArray);
+}
+console.log('quickSort', quickSort(array));
+// Recursive Step Runtime: O(n^logb(a)) => O(n^log2(2)) => O(n^1) => O(n)
+// Runtime Outside of the Recursion: O(n)
+// Algorithm Runtime: O(n^logb(a) * log n) => O(n * log n)
+
+// best, ave: O(n * log n)
+// worst: O(n^2)
