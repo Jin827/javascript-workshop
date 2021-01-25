@@ -67,8 +67,9 @@ function bubbleSort(array) {
     return resultArray;
 }
 console.log("bubbleSort", bubbleSort(array));
-// best: O(n)
-// ave, worst: O(n^2)
+// Time Complexity:
+// best: O(n), ave & worst: O(n^2)
+// Space Complexity: O(1)
 
 /**
  * [ Quick Sort using Recursion ]
@@ -109,8 +110,9 @@ console.log('quickSort', quickSort(array));
 // Time Complexity Outside of the Recursion: O(n)
 // Algorithm Time Complexity: O(n^logb(a) * log n) => O(n * log n)
 
-// best, ave: O(n * log n)
-// worst: O(n^2)
+// Time Complexity:
+// best & ave: O(n * log n), worst: O(n^2)
+// Space Complexity: O(n)
 
 /**
  * [ Merge Sort ]
@@ -152,4 +154,5 @@ function mergeSort(arr) {
     return mergedArr;
 }
 console.log('mergeSort', mergeSort(array));
-// O(n * log n)
+// Time Complexity: O(n * log n)
+// Space Complexity: O(n)

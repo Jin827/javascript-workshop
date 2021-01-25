@@ -18,7 +18,7 @@ console.log("fibonacci", fibonacci(10));
 /* with Recursion */
 let counter = 0;
 function recursiveFib(n) {
-    counter++
+    counter++;
     if (n === 0 || n === 1) {
         return 1;
     } else {
@@ -169,7 +169,8 @@ function fact(n) {
     }
     return sum;
 }
-// O(n)
+// Time Complexity: O(n)
+// Space Complexity: O(1)
 console.log('fact', fact(5));
 
 /* with Recursion */
@@ -180,6 +181,8 @@ function factorial(n) {
         return n * factorial(n - 1); // 1 
     }
 }
+// Time Complexity:
 // 5 * ( 4 * ( 3 * ( 2 * ( 1 ))))
 // n * O(1) => O(n)
+// Space Complexity: O(n)
 console.log('factorial', factorial(5));

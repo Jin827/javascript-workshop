@@ -65,9 +65,11 @@ function comparatorFn(element, item) {
 
 console.log('linearSearch_Complete', linearSearch_Complete(obj, { name: 'ji', age: '18' }, comparatorFn)); // 0 
 /**
+ * Time Complexity:
  * Best: the item's at the beginning -> O(1)
  * Ave : random order, we don't know where the item is -> Tends to be O(n)
  * Worst: the item's at the end -> O(n)
+ * Space Complexity: O(1)
  */
 
 
@@ -97,6 +99,7 @@ console.log('binarySearch', binarySearch(sortedArr, 99));
  * Best: the item's right in the middle -> O(1)
  * Ave : we don't know where the item is -> Tends to be O(log n)
  * Worst: the item's at the beginning or end -> O(log n)
+ * Space Complexity: O(1)
  */
 
 
@@ -106,7 +109,7 @@ function recursiveBinarySearch(sortedArr, element, offset) {
     let startIdx = 0;
     let endIdx = sortedArr.length - 1;
     const middleIdx = startIdx + Math.floor((endIdx - startIdx) / 2);
-    console.log("sortedArr", sortedArr)
+    console.log("sortedArr", sortedArr);
     console.log('index', startIdx, endIdx, middleIdx, offset);
 
     if (sortedArr[middleIdx] === element) {
