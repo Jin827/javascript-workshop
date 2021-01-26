@@ -35,3 +35,77 @@ function cartesian(...sets) {
 console.log('cartesian', cartesian(colors, size, styles));  // [['blue','m], ...]
 // Time Complexity: O(n^x)
 // Space Complexity: O(n^x)
+
+/* Permutations without Repetition */
+
+function looping(x, y) {
+    console.log("looping -> x, y", x, y);
+    const store = [];
+    for (let j = 0; j <= x.length; j++) {
+        console.log('store', x.splice(j, 0, y));
+        store.push(x.splice(j, 0, y));
+    }
+    return store;
+};
+
+function getPermutations(options) {
+    const permutations = [];
+    console.log('[ FN START ]');
+    console.log(options);
+
+    if (options.length === 1) {
+        // returns array of array.
+        return [options];
+    }
+
+    // How Recursion Work..?
+    // the rest of (for loop)function execution pauses And the nested function execution starts.
+
+    // split array until we have an array with just one element.
+    const partialPermutations = getPermutations(options.slice(1));
+    // ... [["order food", "do homework"]], [["do homework"]] 
+
+    console.log('[ AFTER RECURSIVE STEP ]',);
+    console.log('partialPermutationS: ', partialPermutations);
+    // after recursive step
+
+    // we only didn't slice the first option. (Not part of the array)
+    // -> so we need to compare to other permutations.
+    const firstOption = options[0];
+
+    for (let i = 0; i < partialPermutations.length; i++) {
+        const partialPermutation = partialPermutations[i];
+        console.log('[ OUTER LOOP ]',);
+        console.log('partialPermutation: ', partialPermutation);
+
+        // access to the concrete items in the partialPermutation array.
+        for (let j = 0; j <= partialPermutation.length; j++) {
+
+            const permutationInFront = partialPermutation.slice(0, j);
+            const permutationAfter = partialPermutation.slice(j);
+
+            console.log("new permutation", permutationInFront.concat([firstOption], permutationAfter));
+            // combines concrete elements with remaining option(option[0]).
+            // => insert firstOption value into the position 0,1,2,...the end.
+            permutations.push(
+                permutationInFront.concat([firstOption], permutationAfter)
+            );
+        }
+    }
+    // we're done with another recursive step.
+    // execute for loop again with returned permutations.
+    return permutations;
+}
+
+const todoListItems = [
+    'walk the dog',
+    'clean the toilet',
+    'buy groceries',
+    'order food',
+    'do homework'
+];
+
+// Time Complexity: O(n!) => 4 * 3 * 2 * 1 = 24; 5 * 4 * 3 * 2 * 1 = 120
+console.log('getPermutations', getPermutations(todoListItems));
+
+/* Permutations with Repetition */
