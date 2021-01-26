@@ -61,9 +61,8 @@ function getPermutations(options) {
     // How Recursion Work..?
     // the rest of (for loop)function execution pauses And the nested function execution starts.
 
-    // split array until we have an array with just one element.
+    // split array until we have an array with just one element => [["do homework"]] 
     const partialPermutations = getPermutations(options.slice(1));
-    // ... [["order food", "do homework"]], [["do homework"]] 
 
     console.log('[ AFTER RECURSIVE STEP ]',);
     console.log('partialPermutationS: ', partialPermutations);
@@ -106,6 +105,30 @@ const todoListItems = [
 ];
 
 // Time Complexity: O(n!) => 4 * 3 * 2 * 1 = 24; 5 * 4 * 3 * 2 * 1 = 120
-console.log('getPermutations', getPermutations(todoListItems));
+// console.log('getPermutations', getPermutations(todoListItems));
 
 /* Permutations with Repetition */
+function getPermutationsWithRepetition(options, length) {
+    const permutations = [];
+
+    if (length === 1) {
+        // [[1], [2], [3]...]
+        return options.map(option => [option]);
+    }
+    // the end result of the recursions => [[1], [2], [3]]
+    const partialPermutations = getPermutationsWithRepetition(options, length - 1);
+    console.log("getPermutationsWithRepetition -> partialPermutations", partialPermutations);
+
+    for (const option of options) {
+        for (const existingPermutation of partialPermutations) {
+            permutations.push([option].concat(existingPermutation));
+        }
+    }
+
+    return permutations;
+}
+
+const digits = [1, 2, 3];
+const resultLength = 3;
+// Time Complexity: O(n^r) => n is the number of options, r is the length.
+console.log('getPermutationsWithRepetition', getPermutationsWithRepetition(digits, resultLength));
