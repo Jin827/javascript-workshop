@@ -1,4 +1,4 @@
-// Q1
+/*- Q1 -*/
 const person = { name: 'jiah', age: '18' };
 const list = [
     person,
@@ -26,8 +26,7 @@ function linearSearch_Complete(list, element) {
 }
 console.log('linearSearch_Complete', linearSearch_Complete(list, { name: 'jiah', age: '18' }));
 
-
-// Q2
+/*- Q2 -*/
 const array = [-3, 13, -3, 100, -14, 1, 20, 55];
 
 function sort(array) {
@@ -83,8 +82,7 @@ function binarySearch(array, element) {
 }
 console.log('binarySearch', binarySearch(array, 12));
 
-
-// Q3
+/*- Q3 -*/
 function quickSort(array) {
     const copiedArray = [...array];
 
@@ -118,7 +116,7 @@ function quickSort(array) {
 }
 console.log('quickSort', quickSort(array));
 
-// Q4
+/*- Q4 -*/
 function mergeSort(array) {
     // split array
     const middleIdx = Math.floor(array.length / 2);
@@ -156,3 +154,35 @@ function mergeSort(array) {
     return mergedArr;
 }
 console.log('mergeSort', mergeSort(array));
+
+/*- Q5 -*/
+const colors = ['blue', 'red'];
+const size = ['s', 'm', 'l', 'xl'];
+const styles = ['round neck', 'v neck'];
+
+function cartesian(setA, setB) {
+    const product = [];
+
+    setA.forEach(setAEl => {
+        if (!Array.isArray(setAEl)) {
+            setAEl = [setAEl];
+        }
+
+        for (const setBEl of setB) {
+            product.push([...setAEl, setBEl]);
+        }
+    });
+
+    return product;
+}
+
+function cartesianProduct(...options) {
+    let cartesians = options[0];
+
+    for (let i = 1; i < options.length; i++) {
+        cartesians = cartesian(cartesians, options[i]);
+    }
+    // returns arrays of array
+    return cartesians;
+}
+console.log('cartesianProduct', cartesianProduct(colors, size, styles));
