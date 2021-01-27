@@ -117,7 +117,6 @@ function getPermutationsWithRepetition(options, length) {
     }
     // the end result of the recursions => [[1], [2], [3]]
     const partialPermutations = getPermutationsWithRepetition(options, length - 1);
-    console.log("getPermutationsWithRepetition -> partialPermutations", partialPermutations);
 
     for (const option of options) {
         for (const existingPermutation of partialPermutations) {
