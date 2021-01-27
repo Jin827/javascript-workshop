@@ -74,7 +74,7 @@ console.log('quickSort', quickSort(array));
 /**
  * [ Merge Sort ]
  * - sort those arrays and merge them back together.
- * Split array multiple times until we have only 2 elements arrays left.
+ * Split array multiple times until we have only 2 element arrays left.
  */
 function mergeSort(arr) {
     if (arr.length < 2) {
@@ -97,6 +97,7 @@ function mergeSort(arr) {
     let leftArrIndex = 0;
     let rightArrIndex = 0;
 
+    // use 'While' instead of 'for loop' to have 2 conditions.
     while (leftArrIndex < leftSortedArray.length || rightArrIndex < rightSortedArray.length) {
         // when leftArray length is smaller than rightArray length
         // => leftArrIndex >= leftSortedArray.length

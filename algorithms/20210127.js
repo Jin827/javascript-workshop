@@ -28,7 +28,7 @@ console.log('linearSearch_Complete', linearSearch_Complete(list, { name: 'jiah',
 
 
 // Q2
-const array = [-3, 13, -3, 100, -14, 1, 20, 99, 55, 1];
+const array = [-3, 13, -3, 100, -14, 1, 20, 55];
 
 function sort(array) {
     const sorted = [...array];
@@ -51,7 +51,7 @@ function sort(array) {
 }
 
 function search(sortedArr, element) {
-    const middleIdx = Math.floor((sortedArr.length - 1) / 2);
+    const middleIdx = Math.floor(sortedArr.length / 2);
     const middleEl = sortedArr[middleIdx];
 
     if (middleEl === element) {
@@ -74,8 +74,6 @@ function search(sortedArr, element) {
     }
 
     return search(sortedArr.slice(startIdx, endIdx), element);
-
-
 }
 
 function binarySearch(array, element) {
@@ -117,9 +115,44 @@ function quickSort(array) {
 
     // after recursive steps, excutes the following function which was paused.
     return samllerSortedArr.concat(centerArr, biggerSortedArr);
-
-
-
-
 }
 console.log('quickSort', quickSort(array));
+
+// Q4
+function mergeSort(array) {
+    // split array
+    const middleIdx = Math.floor(array.length / 2);
+    const leftArr = array.slice(0, middleIdx);
+    const rightArr = array.slice(middleIdx);
+
+    // end of recursion
+    if (array.length < 2) {
+        return array;
+    }
+    if (array.length === 2) {
+        // sort
+        return array[0] > array[1] ? [array[1], array[0]] : array;
+    }
+
+    // split array multiple times using recursion
+    const leftSortedArrays = mergeSort(leftArr);
+    const rightSortedArrays = mergeSort(rightArr);
+
+    // after recursive steps, sorts and concatenates them.
+    const mergedArr = [];
+    let leftIdx = 0;
+    let rightIdx = 0;
+
+    while (leftIdx < leftSortedArrays.length || rightIdx < rightSortedArrays.length) {
+        if (leftSortedArrays[leftIdx] > rightSortedArrays[rightIdx] || leftIdx >= leftSortedArrays.length) {
+            mergedArr.push(rightSortedArrays[rightIdx]);
+            rightIdx++;
+        } else {
+            mergedArr.push(leftSortedArrays[leftIdx]);
+            leftIdx++;
+        }
+    }
+
+    return mergedArr;
+}
+console.log('mergeSort', mergeSort(array));
