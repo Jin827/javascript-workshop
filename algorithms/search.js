@@ -109,8 +109,6 @@ function recursiveBinarySearch(sortedArr, element, offset) {
     let startIdx = 0;
     let endIdx = sortedArr.length - 1;
     const middleIdx = startIdx + Math.floor((endIdx - startIdx) / 2);
-    console.log("sortedArr", sortedArr);
-    console.log('index', startIdx, endIdx, middleIdx, offset);
 
     if (sortedArr[middleIdx] === element) {
         return middleIdx + offset;

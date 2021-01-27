@@ -84,3 +84,6 @@ function binarySearch(array, element) {
     return output;
 }
 console.log('binarySearch', binarySearch(array, 12));
+
+
+// Q3)
