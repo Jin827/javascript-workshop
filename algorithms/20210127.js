@@ -1,4 +1,4 @@
-// Q1)
+// Q1
 const person = { name: 'jiah', age: '18' };
 const list = [
     person,
@@ -27,8 +27,8 @@ function linearSearch_Complete(list, element) {
 console.log('linearSearch_Complete', linearSearch_Complete(list, { name: 'jiah', age: '18' }));
 
 
-// Q2)
-const array = [9, 13, 1, 5, 27, 55, 99, 100, 78, 12, 20, 50, 68];
+// Q2
+const array = [-3, 13, -3, 100, -14, 1, 20, 99, 55, 1];
 
 function sort(array) {
     const sorted = [...array];
@@ -86,4 +86,40 @@ function binarySearch(array, element) {
 console.log('binarySearch', binarySearch(array, 12));
 
 
-// Q3)
+// Q3
+function quickSort(array) {
+    const copiedArray = [...array];
+
+    if (copiedArray.length <= 1) {
+        // returing - end recursion.
+        return copiedArray;
+    }
+
+    const pivotEl = copiedArray.shift();
+
+    const smallerArr = [];
+    const centerArr = [pivotEl];
+    const biggerArr = [];
+
+    copiedArray.forEach(item => {
+        if (pivotEl > item) {
+            smallerArr.push(item);
+        } else if (pivotEl === item) {
+            centerArr.push(item);
+        } else {
+            biggerArr.push(item);
+        }
+    });
+
+    // after looping
+    const samllerSortedArr = quickSort(smallerArr);
+    const biggerSortedArr = quickSort(biggerArr);
+
+    // after recursive steps, excutes the following function which was paused.
+    return samllerSortedArr.concat(centerArr, biggerSortedArr);
+
+
+
+
+}
+console.log('quickSort', quickSort(array));

@@ -1,50 +1,6 @@
 /**
  * Compare tow items at a time and sort them. Go through the entire sorted multiple times until all pairs were compared and sorted.
  */
-const array = [3, 10, -3, 48, 5];
-
-function validation(sorted) {
-    let test = [];
-
-    for (let i = 0; i < sorted.length; i++) {
-        if (sorted[i] > sorted[i + 1]) {
-            test.push(false);
-            break;
-        } else {
-            test.push(true);
-        }
-    };
-
-    const inValid = test.findIndex(i => i === false);
-
-    if (inValid === -1) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function simpleSort(array) {
-    let sorted = [...array];
-    let isSorted = false;
-
-    while (!isSorted) {
-        sorted.forEach((value, idx) => {
-            const current = value;
-            const next = sorted[idx + 1];
-
-            if (current > next) {
-                sorted[idx] = next;
-                sorted[idx + 1] = current;
-            }
-        });
-
-        isSorted = validation(sorted);
-    }
-    return sorted;
-}
-console.log('simpleSort', simpleSort(array));
-
 function bubbleSort(array) {
     const resultArray = [...array];
 
@@ -80,6 +36,7 @@ function quickSort(arr) {
     const copiedArray = [...arr];
 
     if (copiedArray.length <= 1) {
+        // end recursive step.
         return copiedArray;
     }
 
@@ -116,8 +73,8 @@ console.log('quickSort', quickSort(array));
 
 /**
  * [ Merge Sort ]
- * Split array multiple times until we have only 2-emelemt arrays left.
  * - sort those arrays and merge them back together.
+ * Split array multiple times until we have only 2 elements arrays left.
  */
 function mergeSort(arr) {
     if (arr.length < 2) {
