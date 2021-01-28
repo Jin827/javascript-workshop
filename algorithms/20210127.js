@@ -186,3 +186,37 @@ function cartesianProduct(...options) {
     return cartesians;
 }
 console.log('cartesianProduct', cartesianProduct(colors, size, styles));
+
+/*- Q6 -*/
+function getPermutations(options) {
+    if (options.length <= 1) {
+        // always returns arrays of array
+        return [options];
+    }
+
+    // splitting
+    const permutations = [];
+    const shiftedEl = options.shift();
+    const partialPermutations = getPermutations(options);
+
+    // permuting with shiftedEl
+    for (const permutation of partialPermutations) {
+        for (let j = 0; j <= permutation.length; j++) {
+            const copiedPermutation = [...permutation];
+            copiedPermutation.splice(j, 0, shiftedEl);
+            permutations.push(copiedPermutation);
+        }
+
+    }
+    // returns arrays of array
+    return permutations;
+}
+
+const todoListItems = [
+    'walk the dog',
+    'clean the toilet',
+    'buy groceries',
+    'order food',
+    'do homework'
+];
+console.log('getPermutations', getPermutations(todoListItems));;

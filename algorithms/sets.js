@@ -50,8 +50,6 @@ function looping(x, y) {
 
 function getPermutations(options) {
     const permutations = [];
-    console.log('[ FN START ]');
-    console.log(options);
 
     if (options.length === 1) {
         // returns array of array.
@@ -64,18 +62,13 @@ function getPermutations(options) {
     // split array until we have an array with just one element => [["do homework"]] 
     const partialPermutations = getPermutations(options.slice(1));
 
-    console.log('[ AFTER RECURSIVE STEP ]',);
-    console.log('partialPermutationS: ', partialPermutations);
     // after recursive step
-
     // we only didn't slice the first option. (Not part of the array)
     // -> so we need to compare to other permutations.
     const firstOption = options[0];
 
     for (let i = 0; i < partialPermutations.length; i++) {
         const partialPermutation = partialPermutations[i];
-        console.log('[ OUTER LOOP ]',);
-        console.log('partialPermutation: ', partialPermutation);
 
         // access to the concrete items in the partialPermutation array.
         for (let j = 0; j <= partialPermutation.length; j++) {
@@ -83,7 +76,6 @@ function getPermutations(options) {
             const permutationInFront = partialPermutation.slice(0, j);
             const permutationAfter = partialPermutation.slice(j);
 
-            console.log("new permutation", permutationInFront.concat([firstOption], permutationAfter));
             // combines concrete elements with remaining option(option[0]).
             // => insert firstOption value into the position 0,1,2,...the end.
             permutations.push(
@@ -105,7 +97,7 @@ const todoListItems = [
 ];
 
 // Time Complexity: O(n!) => 4 * 3 * 2 * 1 = 24; 5 * 4 * 3 * 2 * 1 = 120
-// console.log('getPermutations', getPermutations(todoListItems));
+console.log('getPermutations', getPermutations(todoListItems));
 
 /* Permutations with Repetition */
 function getPermutationsWithRepetition(options, length) {
