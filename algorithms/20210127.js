@@ -220,3 +220,35 @@ const todoListItems = [
     'do homework'
 ];
 console.log('getPermutations', getPermutations(todoListItems));;
+
+/*- Q6 -*/
+function permuting(arrays, options) {
+    const result = [];
+
+    arrays.forEach(array => {
+        if (!Array.isArray(array)) {
+            array = [array];
+        }
+
+        for (const option of options) {
+            result.push([...array, option]);
+        }
+    });
+
+    return result;
+}
+
+function getPermutationsWithRepetition(options, length) {
+    let permutations = options.map(option => [option]);
+
+    // permutations has already one length. so it starts from 2.
+    for (let i = 2; i <= length; i++) {
+        permutations = permuting(permutations, options);
+    }
+
+    return permutations;
+}
+
+const digits = [1, 2, 3];
+const resultLength = 3;
+console.log('getPermutationsWithRepetition', getPermutationsWithRepetition(digits, resultLength));
