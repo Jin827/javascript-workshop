@@ -189,16 +189,18 @@ console.log('cartesianProduct', cartesianProduct(colors, size, styles));
 
 /*- Q6 -*/
 function getPermutations(options) {
+
     if (options.length <= 1) {
+        console.log('RETURNING..', [options]);
         // always returns arrays of array
         return [options];
     }
 
     // splitting
-    const permutations = [];
     const shiftedEl = options.shift();
     const partialPermutations = getPermutations(options);
 
+    const permutations = [];
     // permuting with shiftedEl
     for (const permutation of partialPermutations) {
         for (let j = 0; j <= permutation.length; j++) {
@@ -252,3 +254,24 @@ function getPermutationsWithRepetition(options, length) {
 const digits = [1, 2, 3];
 const resultLength = 3;
 console.log('getPermutationsWithRepetition', getPermutationsWithRepetition(digits, resultLength));
+
+function recursivePermutations(options, length) {
+
+    if (length === 1) {
+        return options.map(option => [option]);
+    }
+
+    // recursive function call untill the length is 1.
+    const partialPermutations = recursivePermutations(options, length - 1);
+
+    const permutations = [];
+    // after recursive steps, the function below will be called as much as the number of the recursive function calls.
+    for (const option of options) {
+        partialPermutations.forEach(partialPermutation => {
+            permutations.push([option].concat(partialPermutation));
+        });
+    }
+
+    return permutations;
+}
+console.log('recursivePermutations', recursivePermutations(digits, resultLength));
