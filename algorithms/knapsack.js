@@ -49,30 +49,34 @@ function knapsack(list, maxWeight) {
 console.log('knapsack', knapsack(items, maxWeight)); // ['a', 'd']
 
 
-function knapsack_recursion(items, cap, itemIndex) {
-    console.log('START ..',);
+function knapsack_recursion(items, cap, itemIndex, option = '') {
+    console.count(`### START.. ###`);
+    console.log(option);
+    console.log(`[${itemIndex}] `, `cap: ${cap} `, `weight: ${itemIndex >= 0 ? items[itemIndex].weight : null}`);
+
     if (cap === 0 || itemIndex < 0) {
-        console.log('RETURNING Init Data',);
+        console.log('RETURN.. - End -',);
         return { items: [], value: 0, weight: 0 };
     }
     if (cap < items[itemIndex].weight) {
-        console.log('RETURNING, 무게가 클때',);
-        return knapsack_recursion(items, cap, itemIndex - 1);
+        return knapsack_recursion(items, cap, itemIndex - 1, 'cap < weight');
     }
+
     const sackWithItem = knapsack_recursion(
         items,
         cap - items[itemIndex].weight,
-        itemIndex - 1
+        itemIndex - 1,
+        'sackWithItem'
     );
-    const sackWithoutItem = knapsack_recursion(items, cap, itemIndex - 1);
+    const sackWithoutItem = knapsack_recursion(items, cap, itemIndex - 1, 'sackWithoutItem');
 
-    console.log('items[idx].value ', `[${itemIndex}] `, items[itemIndex].value);
-    console.log("sack With Item", sackWithItem);
-    console.log("sack WithOUT Item", sackWithoutItem);
+    console.log("sack WITH Item", `[${itemIndex}] `, sackWithItem);
+    console.log("sack WITHOUT Item", `[${itemIndex}] `, sackWithoutItem);
 
     const valueWithItem = sackWithItem.value + items[itemIndex].value;
-    console.log("valueWithItem", valueWithItem);
     const valueWithoutItem = sackWithoutItem.value;
+
+    console.log("valueWithItem", valueWithItem);
     console.log("valueWithoutItem", valueWithoutItem);
 
     if (valueWithItem > valueWithoutItem) {
@@ -81,9 +85,89 @@ function knapsack_recursion(items, cap, itemIndex) {
             value: sackWithItem.value + items[itemIndex].value,
             weight: sackWithItem.weight + items[itemIndex].weight,
         };
+
+        console.log("RETURN updatedSack", updatedSack);
         return updatedSack;
     } else {
+        console.log("RETURN sackWithoutItem", sackWithoutItem);
         return sackWithoutItem;
     }
 }
 console.log('knapsack_recursion', knapsack_recursion(items, maxWeight, items.length - 1));
+
+function improved_knapsack(items, cap, itemIndex, memo, option = '') {
+    console.count(`### START.. ###`);
+    console.log(option);
+    console.log(`[${itemIndex}] `, `cap: ${cap} `, `weight: ${itemIndex >= 0 ? items[itemIndex].weight : null}`);
+
+    if (memo[cap][itemIndex]) {
+        // returns a knapsack
+        console.error('RETURN Knapsack: ', memo[cap][itemIndex]);
+        return memo[cap][itemIndex];
+    }
+    if (cap === 0 || itemIndex < 0) {
+        console.log('RETURN.. - End -',);
+        return { items: [], value: 0, weight: 0 };
+    }
+    if (cap < items[itemIndex].weight) {
+        return improved_knapsack(items, cap, itemIndex - 1, memo, 'cap < weight');
+    }
+
+    const sackWithItem = improved_knapsack(
+        items,
+        cap - items[itemIndex].weight,
+        itemIndex - 1,
+        memo,
+        'sackWithItem'
+    );
+    const sackWithoutItem = improved_knapsack(items, cap, itemIndex - 1, memo, 'sackWithoutItem');
+
+    console.log("sack WITH Item", `[${itemIndex}] `, sackWithItem);
+    console.log("sack WITHOUT Item", `[${itemIndex}] `, sackWithoutItem);
+
+    const valueWithItem = sackWithItem.value + items[itemIndex].value;
+    const valueWithoutItem = sackWithoutItem.value;
+
+    console.log("valueWithItem", valueWithItem);
+    console.log("valueWithoutItem", valueWithoutItem);
+
+    let resultSack;
+
+    if (valueWithItem > valueWithoutItem) {
+        const updatedSack = {
+            items: sackWithItem.items.concat(items[itemIndex]),
+            value: sackWithItem.value + items[itemIndex].value,
+            weight: sackWithItem.weight + items[itemIndex].weight,
+        };
+
+        console.log("RETURN updatedSack", updatedSack);
+        resultSack = updatedSack;
+    } else {
+        console.log("RETURN sackWithoutItem", sackWithoutItem);
+        resultSack = sackWithoutItem;
+    }
+
+    // update memo
+    memo[cap][itemIndex] = resultSack;
+    console.log("memo", memo);
+
+    return resultSack;
+}
+
+function knapsack_memo(items, cap, index) {
+    /**
+     * Array(cap + 1) - to use 'cap' as index.
+     * ex) cap = 2 -> array[2] should exsit -> array.length = cap + 1 
+     */
+    const memo = Array.from(Array(cap + 1), () => Array(items.length).fill(undefined));
+    /**
+     * [Array(items.length),... x (cap + 1)]
+     * Array(items.length) => [undefined,... x (items.length)]
+     */
+    return improved_knapsack(items, cap, index, memo);
+}
+
+// console.log('knapsack_memo', knapsack_memo(items, maxWeight, items.length - 1));
+// Time Complexity
+// without memoization: O(2^n)
+// with memoization: O(n*C)
