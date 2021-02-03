@@ -1,4 +1,4 @@
-class LinkedList {
+export class LinkedList {
     constructor() {
         this.head = null; // first element of the list
         this.tail = null; // last element of the list
@@ -94,6 +94,23 @@ class LinkedList {
         }
     }
 
+    deleteHead() {
+        if (!this.head) {
+            return null;
+        }
+
+        const deletedItem = this.head;
+
+        if (this.head.next) {
+            this.head = this.head.next;
+        } else {
+            this.head = null;
+            this.tail = null;
+        }
+
+        return deletedItem;
+    }
+
     toArray() {
         const elements = [];
 
@@ -117,16 +134,16 @@ linkedList1.append(18.51);
 linkedList1.prepend('first value');
 linkedList1.prepend('first value');
 
-console.log(linkedList1.toArray());
+console.log('linkedList', linkedList1.toArray());
 
 linkedList1.delete('max');
 linkedList1.delete('first value');
 linkedList1.delete(18.51);
 
-console.log(linkedList1.toArray());
+console.log('linkedList', linkedList1.toArray());
 
-console.log(linkedList1.find(2));
-console.log(linkedList1.find(true));
+console.log('linkedList', linkedList1.find(2));
+console.log('linkedList', linkedList1.find(true));
 
 linkedList1.insertAfter('new value - 1', 1);
-console.log(linkedList1.toArray());
+console.log('linkedList', linkedList1.toArray());
