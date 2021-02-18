@@ -125,25 +125,25 @@ export class LinkedList {
     }
 }
 
-const linkedList1 = new LinkedList();
-linkedList1.append(1);
-linkedList1.append('max');
-linkedList1.append('max');
-linkedList1.append(true);
-linkedList1.append(18.51);
-linkedList1.prepend('first value');
-linkedList1.prepend('first value');
+// const linkedList1 = new LinkedList();
+// linkedList1.append(1);
+// linkedList1.append('max');
+// linkedList1.append('max');
+// linkedList1.append(true);
+// linkedList1.append(18.51);
+// linkedList1.prepend('first value');
+// linkedList1.prepend('first value');
 
-console.log('linkedList', linkedList1.toArray());
+// console.log('linkedList', linkedList1.toArray());
 
-linkedList1.delete('max');
-linkedList1.delete('first value');
-linkedList1.delete(18.51);
+// linkedList1.delete('max');
+// linkedList1.delete('first value');
+// linkedList1.delete(18.51);
 
-console.log('linkedList', linkedList1.toArray());
+// console.log('linkedList', linkedList1.toArray());
 
-console.log('linkedList', linkedList1.find(2));
-console.log('linkedList', linkedList1.find(true));
+// console.log('linkedList', linkedList1.find(2));
+// console.log('linkedList', linkedList1.find(true));
 
-linkedList1.insertAfter('new value - 1', 1);
-console.log('linkedList', linkedList1.toArray());
+// linkedList1.insertAfter('new value - 1', 1);
+// console.log('linkedList', linkedList1.toArray());
