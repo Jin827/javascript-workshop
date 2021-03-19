@@ -26,9 +26,9 @@ function recursiveFib(n) {
     }
 }
 // O(2^n) => Exponential Time Complexity => Recursion is Not always best!
-console.log('recursiveFib', recursiveFib(20), counter);
+console.log('recursiveFib', recursiveFib(10), counter);
 counter = 0;
-console.log('recursiveFib', recursiveFib(30), counter);
+console.log('recursiveFib', recursiveFib(10), counter);
 counter = 0;
 
 /* with Dynamic Programming 
@@ -47,8 +47,18 @@ function dynamicFib(n, memo) {
     if (n === 0 || n === 1) {
         result = 1;
     } else {
+        console.log(`Recursioning.. [${n}] ${JSON.stringify(memo)}`);
         result = dynamicFib(n - 1, memo) + dynamicFib(n - 2, memo);
+
     }
+
+    // after recursion
+    console.log(`result [${n}] ${result}`,);
+    // n => 2
+    // result = dynamicFib(2-1) + dynamicFic(2-2) = dynamicFib(1) + dynamicFic(0) = 1 + 1 = 2
+    // n => 3
+    // result = dynamicFib(3-1) + dynamicFic(3-2) = dynamicFib(2) + dynamicFic(1) = 2 + 1 = 3
+
     memo[n] = result;
 
     return result;
