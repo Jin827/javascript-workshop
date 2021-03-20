@@ -60,7 +60,6 @@ function dynamicFib(n, memo) {
     // result = dynamicFib(3-1) + dynamicFic(3-2) = dynamicFib(2) + dynamicFic(1) = 2 + 1 = 3
 
     memo[n] = result;
-
     return result;
 }
 // T = 2n => O(n)
@@ -72,6 +71,7 @@ counter = 0;
  * Q) Determine whether an input number is a prime number(소수).
  * isPrime(9); // false
  * isPrime(5); // true
+ * *약수의 중심(루트 n)을 기준으로, 자기자신을 제외하고 중시을 초과하는 숫자에서 나눴을때 나머지가 0이되는 숫자는 없다.
  */
 function primeNumber(n) {
     if (n <= 1) {
@@ -186,6 +186,7 @@ console.log('fact', fact(5));
 /* with Recursion */
 function factorial(n) {
     if (n <= 1) { // 1
+        // factorial(1) 값 처리.
         return 1;   // 1
     } else {
         return n * factorial(n - 1); // 1 
