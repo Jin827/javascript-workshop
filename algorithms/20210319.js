@@ -157,16 +157,56 @@ function binarySearch(sortedArr, element) {
     let endIdx = sortedArr.length - 1;
 
     while (startIdx < endIdx) {
-        let medianIdx = startIdx + Math.floor((endIdx - startIdx) / 2);
-        const medianValue = sortedArr[medianIdx];
+        const medianIdx = startIdx + Math.floor((endIdx - startIdx) / 2);
 
-        if (medianValue === element) {
+        if (sortedArr[medianIdx] === element) {
             return medianIdx;
-        } else if (medianValue < element) {
+        }
+
+        if (sortedArr[medianIdx] < element) {
             startIdx = medianIdx + 1;
-        } else if (medianValue > element) {
+        } else {
             endIdx = medianIdx - 1;
         }
     }
 }
 console.log('binarySearch', binarySearch(sortedArr, 99));
+
+/**
+ * Bubble Sort
+ * Compare tow items at a time and sort them. Go through the entire sorted multiple times until all pairs were compared and sorted.
+ */
+const array = [3, 10, -3, 48, -10, 5];
+function bubbleSort(array) {
+    const resultArray = [...array];
+
+    for (outer = 0; outer < resultArray.length; outer++) {
+        let outerEl = resultArray[outer];
+        for (inner = outer + 1; inner < resultArray.length; inner++) {
+            const innerEl = resultArray[inner];
+
+            if (outerEl > innerEl) {
+                resultArray[outer] = innerEl;
+                resultArray[inner] = outerEl;
+
+                outerEl = resultArray[outer];
+            }
+
+        }
+
+    }
+    return resultArray;
+}
+console.log("bubbleSort", bubbleSort(array));
+
+/**
+ * [ Quick Sort using Recursion ]
+ * Use pivot elements to split array into smaller chunks - elements bigger, smaller and equal than the pivot element.
+ * Repeat that process for all chunks and concat the sorted chunks.
+ */
+function quickSort(arr) {
+    const copiedArray = [...arr];
+
+
+}
+console.log('quickSort', quickSort(array));

@@ -82,6 +82,7 @@ function binarySearch(sortedArr, element) {
 
     while (startIdx <= endIdx) {
         const middleIdx = startIdx + Math.floor((endIdx - startIdx) / 2);
+        console.log('binarySearch ->', startIdx, medianIdx, endIdx);
 
         if (sortedArr[middleIdx] === element) {
             return middleIdx;

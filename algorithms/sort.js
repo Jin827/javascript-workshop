@@ -1,6 +1,7 @@
 /**
  * Compare tow items at a time and sort them. Go through the entire sorted multiple times until all pairs were compared and sorted.
  */
+const array = [3, 10, -3, 48, 5, 33, 99];
 function bubbleSort(array) {
     const resultArray = [...array];
 
