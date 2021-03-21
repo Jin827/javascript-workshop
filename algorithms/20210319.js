@@ -115,3 +115,58 @@ function factorial(n) {
     }
 }
 console.log('factorial', factorial(5));
+
+/* Linear Search Algorithm */
+const arr = [5, 4, 20, -10, 33, 51];
+const person = { name: 'ji', age: '18' };
+const obj = [
+    person,
+    { name: 'ah', age: '32' }
+];
+
+function linearSearch(arr, element) {
+    for (i = 0; i < arr.length; i++) {
+        if (arr[i] === element) {
+            return arr[i];
+        }
+    }
+    return 'No Match';
+}
+console.log('linearSearch', linearSearch(arr, 4));
+console.log('linearSearch', linearSearch(obj, person));
+
+function linearSearch_Complete(object, element, comparatorFn) {
+    for (i = 0; i < object.length; i++) {
+        if (comparatorFn(object[i], element)) {
+            return i;
+        }
+    }
+    return 'No Match';
+}
+
+function comparatorFn(item, element) {
+    return item.name === element.name && item.age === element.age;
+}
+console.log('linearSearch_Complete', linearSearch_Complete(obj, { name: 'ji', age: '18' }, comparatorFn));
+
+/* Binary Search Algorithm */
+const sortedArr = [1, 5, 9, 13, 27, 55, 78, 99, 100];
+
+function binarySearch(sortedArr, element) {
+    let startIdx = 0;
+    let endIdx = sortedArr.length - 1;
+
+    while (startIdx < endIdx) {
+        let medianIdx = startIdx + Math.floor((endIdx - startIdx) / 2);
+        const medianValue = sortedArr[medianIdx];
+
+        if (medianValue === element) {
+            return medianIdx;
+        } else if (medianValue < element) {
+            startIdx = medianIdx + 1;
+        } else if (medianValue > element) {
+            endIdx = medianIdx - 1;
+        }
+    }
+}
+console.log('binarySearch', binarySearch(sortedArr, 99));
