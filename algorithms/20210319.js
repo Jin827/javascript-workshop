@@ -176,7 +176,7 @@ console.log('binarySearch', binarySearch(sortedArr, 99));
  * Bubble Sort
  * Compare tow items at a time and sort them. Go through the entire sorted multiple times until all pairs were compared and sorted.
  */
-const array = [3, 10, -3, 48, -10, 5];
+const array = [8, 3, 7, 10, 4, 12, 19];
 function bubbleSort(array) {
     const resultArray = [...array];
 
@@ -207,6 +207,66 @@ console.log("bubbleSort", bubbleSort(array));
 function quickSort(arr) {
     const copiedArray = [...arr];
 
+    if (copiedArray.length <= 1) {
+        return copiedArray;
+    }
 
+    const smallerElArray = [];
+    const biggerElArray = [];
+    const pivotEl = copiedArray.shift();
+    const centerElArray = [pivotEl];
+
+
+    for (let i = 0; i < copiedArray.length; i++) {
+        const currentEl = copiedArray[i];
+
+        if (currentEl === pivotEl) {
+            centerElArray.push(currentEl);
+        } else if (currentEl < pivotEl) {
+            smallerElArray.push(currentEl);
+        } else {
+            biggerElArray.push(currentEl);
+        }
+    }
+
+    const smallerSortedArray = quickSort(smallerElArray);
+    const biggerSortedArray = quickSort(biggerElArray);
+
+    return [...smallerSortedArray, ...centerElArray, ...biggerSortedArray];
 }
 console.log('quickSort', quickSort(array));
+
+/**
+ * [ Merge Sort ]
+ * - sort those arrays and merge them back together.
+ * Split array multiple times until we have only 2 element arrays left.
+ */
+function mergeSort(arr) {
+
+    if (arr.length < 2) {
+        return arr;
+    }
+    if (arr.length === 2) {
+        return arr[0] < arr[1] ? arr : [arr[1], arr[0]];
+    }
+
+    const medianIdx = Math.floor(arr.length / 2);
+    const leftSortedArray = mergeSort(arr.slice(0, medianIdx));
+    const rightSortedArray = mergeSort(arr.slice(medianIdx));
+
+    const mergedArray = [];
+    let leftArrIdx = 0;
+    let rightArrIdx = 0;
+
+    while (leftArrIdx < leftSortedArray.length || rightArrIdx < rightSortedArray.length) {
+        if (leftArrIdx >= leftSortedArray.length || leftSortedArray[leftArrIdx] > rightSortedArray[rightArrIdx]) {
+            mergedArray.push(rightSortedArray[rightArrIdx]);
+            rightArrIdx++;
+        } else {
+            mergedArray.push(leftSortedArray[leftArrIdx]);
+            leftArrIdx++;
+        }
+    }
+    return mergedArray;
+}
+console.log('mergeSort', mergeSort(array));

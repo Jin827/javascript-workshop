@@ -100,12 +100,13 @@ function mergeSort(arr) {
 
     // use 'While' instead of 'for loop' to have 2 conditions.
     while (leftArrIndex < leftSortedArray.length || rightArrIndex < rightSortedArray.length) {
-        // when leftArray length is smaller than rightArray length
-        // => leftArrIndex >= leftSortedArray.length
+        // 숫자가 작은쪽을 mergedArr에 push한다.
         if (leftArrIndex >= leftSortedArray.length || leftSortedArray[leftArrIndex] > rightSortedArray[rightArrIndex]) {
+            // leftArrIndex >= leftSortedArray.length (right array 값만 남은 경우)
             mergedArr.push(rightSortedArray[rightArrIndex]);
             rightArrIndex++;
         } else {
+            // rightArrIdx >= rightSortedArray.length (left array 값만 남은 경우)
             mergedArr.push(leftSortedArray[leftArrIndex]);
             leftArrIndex++;
         }
