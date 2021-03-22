@@ -270,3 +270,34 @@ function mergeSort(arr) {
     return mergedArray;
 }
 console.log('mergeSort', mergeSort(array));
+
+/* Cartesian Product */
+const colors = ['blue', 'red'];
+const size = ['s', 'm', 'l', 'xl'];
+const styles = ['round neck', 'v neck'];
+
+function cartesian(...sets) {
+    let product = sets[0];
+
+    for (let i = 1; i < sets.length; i++) {
+        product = looping(product, sets[i]);
+    }
+    return product;
+}
+
+function looping(product, set) {
+    let result = [];
+
+    product.forEach((el) => {
+        if (!Array.isArray(el)) {
+            el = [el];
+        }
+
+        for (const setEl of set) {
+            result.push([...el, setEl]);
+        }
+    });
+
+    return result;
+}
+console.log('cartesian', cartesian(colors, size, styles));
