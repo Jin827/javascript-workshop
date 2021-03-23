@@ -303,10 +303,6 @@ function cartProduct(product, set) {
 console.log('cartesian', cartesian(colors, size, styles));
 
 /* Permutations without Repetition */
-function looping(x, y) {
-
-};
-
 function getPermutations(options) {
     let permutations = [];
 
@@ -340,3 +336,28 @@ const todoListItems = [
     'do homework'
 ];
 console.log('getPermutations', getPermutations(todoListItems));
+
+/* Permutations with Repetition */
+function getPermutationsWithRepetition(options, length) {
+    let permutations = options.map(option => [option]);
+
+    for (let i = 0; i < length; i++) {
+        permutations = looping(permutations, options);
+    }
+    return permutations;
+}
+
+function looping(permutations, options) {
+    const result = [];
+
+    permutations.forEach(permutation => {
+        for (const option of options) {
+            result.push([...permutation, option]);
+        }
+    });
+    return result;
+};
+
+const digits = [1, 2, 3];
+const resultLength = 4;
+console.log('getPermutationsWithRepetition', getPermutationsWithRepetition(digits, resultLength));
