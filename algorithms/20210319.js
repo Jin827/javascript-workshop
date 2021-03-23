@@ -335,7 +335,7 @@ const todoListItems = [
     'order food',
     'do homework'
 ];
-console.log('getPermutations', getPermutations(todoListItems));
+console.log('getPermutations', getPermutations(todoListItems).length);
 
 /* Permutations with Repetition */
 function getPermutationsWithRepetition(options, length) {
@@ -360,4 +360,41 @@ function looping(permutations, options) {
 
 const digits = [1, 2, 3];
 const resultLength = 4;
-console.log('getPermutationsWithRepetition', getPermutationsWithRepetition(digits, resultLength));
+console.log('getPermutationsWithRepetition', getPermutationsWithRepetition(digits, resultLength).length);
+
+/**
+ * [Knapsack Problem]
+ * You got a list of items where every item has a val and a weight.
+ * You got a bag that holds a maximum weight of X.
+ *
+ * Write a program that maximizes the val of the items you put into the bag whilst
+ * ensuring that you don't exceed the maximum weight.
+ */
+const items = [
+    { id: 'a', value: 3, weight: 3 },
+    { id: 'b', value: 10, weight: 3 },
+    { id: 'c', value: 6, weight: 8 },
+    { id: 'd', value: 20, weight: 4 },
+];
+const maxWeight = 8;
+
+function knapsack(list, maxWeight) {
+    let bag = { items: [], value: 0, weight: 0 };
+
+    for (let outer = 0; outer < list.length; outer++) {
+        for (let inner = outer + 1; inner < list.length; inner++) {
+            const totalValue = list[outer].value + list[inner].value;
+            const totalWeight = list[outer].weight + list[inner].weight;
+
+            if (bag.weight <= totalWeight <= maxWeight && totalValue >= bag.value) {
+                bag = {
+                    items: [list[outer], list[inner]],
+                    value: totalValue,
+                    weight: totalWeight
+                };
+            }
+        }
+    }
+    return bag;
+}
+console.log('knapsack', knapsack(items, maxWeight));

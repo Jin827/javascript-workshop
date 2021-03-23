@@ -8,8 +8,8 @@
  */
 const items = [
     { id: 'a', value: 3, weight: 3 },
-    { id: 'b', value: 6, weight: 8 },
-    { id: 'c', value: 10, weight: 3 },
+    { id: 'b', value: 10, weight: 3 },
+    { id: 'c', value: 6, weight: 8 },
     { id: 'd', value: 20, weight: 4 },
 ];
 const maxWeight = 8;
@@ -46,7 +46,7 @@ function knapsack(list, maxWeight) {
     }
     return bag;
 }
-console.log('knapsack', knapsack(items, maxWeight)); // ['a', 'd']
+console.log('knapsack', knapsack(items, maxWeight)); // ['c', 'd']
 
 
 function knapsack_recursion(items, cap, itemIndex, option = '') {
