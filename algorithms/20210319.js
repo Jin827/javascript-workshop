@@ -280,12 +280,12 @@ function cartesian(...sets) {
     let product = sets[0];
 
     for (let i = 1; i < sets.length; i++) {
-        product = looping(product, sets[i]);
+        product = cartProduct(product, sets[i]);
     }
     return product;
 }
 
-function looping(product, set) {
+function cartProduct(product, set) {
     let result = [];
 
     product.forEach((el) => {
@@ -297,7 +297,46 @@ function looping(product, set) {
             result.push([...el, setEl]);
         }
     });
-
     return result;
 }
+
 console.log('cartesian', cartesian(colors, size, styles));
+
+/* Permutations without Repetition */
+function looping(x, y) {
+
+};
+
+function getPermutations(options) {
+    let permutations = [];
+
+    if (options.length <= 1) {
+        return [options];
+    }
+
+    const shiftedEl = options.shift();
+    const partialPermutations = getPermutations(options);
+
+    partialPermutations.forEach(permutation => {
+
+        for (let i = 0; i <= permutation.length; i++) {
+
+            const front = permutation.slice(0, i);
+            const after = permutation.slice(i);
+
+            permutations.push(
+                front.concat([shiftedEl], after)
+            );
+        }
+    });
+    return permutations;
+}
+
+const todoListItems = [
+    'walk the dog',
+    'clean the toilet',
+    'buy groceries',
+    'order food',
+    'do homework'
+];
+console.log('getPermutations', getPermutations(todoListItems));

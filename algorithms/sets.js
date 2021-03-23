@@ -37,7 +37,6 @@ console.log('cartesian', cartesian(colors, size, styles));  // [['blue','m], ...
 // Space Complexity: O(n^x)
 
 /* Permutations without Repetition */
-
 function looping(x, y) {
     console.log("looping -> x, y", x, y);
     const store = [];
