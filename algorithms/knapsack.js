@@ -14,70 +14,24 @@ const items = [
 ];
 const maxWeight = 8;
 
-function knapsack(list, maxWeight) {
-    let bag = [];
-    const permutations = [];
-
-    // find all permutations that meets a maximum weight below the max weight
-    for (let outer = 0; outer < list.length; outer++) {
-
-        let items = [];
-        let weight = 0;
-        let value = 0;
-
-        for (let inner = outer; inner < list.length; inner++) {
-
-            if (weight <= maxWeight && list[inner].weight <= maxWeight - weight) {
-                items.push(list[inner]);
-                weight += list[inner].weight;
-                value += list[inner].value;
-            }
-        }
-        permutations.push({ items, value, weight });
-    }
-
-    // find hightest value of permutations
-    bag = permutations[0];
-
-    for (const permutation of permutations) {
-        if (bag.value < permutation.value) {
-            bag = permutation;
-        }
-    }
-    return bag;
-}
-console.log('knapsack', knapsack(items, maxWeight)); // ['c', 'd']
-
-
-function knapsack_recursion(items, cap, itemIndex, option = '') {
-    console.count(`### START.. ###`);
-    console.log(option);
-    console.log(`[${itemIndex}] `, `cap: ${cap} `, `weight: ${itemIndex >= 0 ? items[itemIndex].weight : null}`);
-
-    if (cap === 0 || itemIndex < 0) {
-        console.log('RETURN.. - End -',);
+function knapsack(items, cap, itemIndex) {
+    if (cap === 0 || itemIndex < 0) { // base code
         return { items: [], value: 0, weight: 0 };
     }
     if (cap < items[itemIndex].weight) {
-        return knapsack_recursion(items, cap, itemIndex - 1, 'cap < weight');
+        return knapsack(items, cap, itemIndex - 1);
     }
 
-    const sackWithItem = knapsack_recursion(
+    /*- if (cap >= items[itemIndex].weight) -*/
+    const sackWithItem = knapsack( // 1. 아이템을 sack에 포함시킨다고 가정한 경우
         items,
         cap - items[itemIndex].weight,
         itemIndex - 1,
-        'sackWithItem'
     );
-    const sackWithoutItem = knapsack_recursion(items, cap, itemIndex - 1, 'sackWithoutItem');
+    const sackWithoutItem = knapsack(items, cap, itemIndex - 1); // 2. 아이템을 sack에 포함시키기 않는다고 가정한 경우
 
-    console.log("sack WITH Item", `[${itemIndex}] `, sackWithItem);
-    console.log("sack WITHOUT Item", `[${itemIndex}] `, sackWithoutItem);
-
-    const valueWithItem = sackWithItem.value + items[itemIndex].value;
-    const valueWithoutItem = sackWithoutItem.value;
-
-    console.log("valueWithItem", valueWithItem);
-    console.log("valueWithoutItem", valueWithoutItem);
+    const valueWithItem = sackWithItem.value + items[itemIndex].value;  // 아이템을 sack에 포함시킨다고 가정한 경우의 value
+    const valueWithoutItem = sackWithoutItem.value; // 아이템을 sack에 포함시키기 않는다고 가정한 경우의 value
 
     if (valueWithItem > valueWithoutItem) {
         const updatedSack = {
@@ -85,32 +39,22 @@ function knapsack_recursion(items, cap, itemIndex, option = '') {
             value: sackWithItem.value + items[itemIndex].value,
             weight: sackWithItem.weight + items[itemIndex].weight,
         };
-
-        console.log("RETURN updatedSack", updatedSack);
         return updatedSack;
     } else {
-        console.log("RETURN sackWithoutItem", sackWithoutItem);
         return sackWithoutItem;
     }
 }
-console.log('knapsack_recursion', knapsack_recursion(items, maxWeight, items.length - 1));
+console.log('knapsack', knapsack(items, maxWeight, items.length - 1));
 
-function improved_knapsack(items, cap, itemIndex, memo, option = '') {
-    console.count(`### START.. ###`);
-    console.log(option);
-    console.log(`[${itemIndex}] `, `cap: ${cap} `, `weight: ${itemIndex >= 0 ? items[itemIndex].weight : null}`);
-
+function improved_knapsack(items, cap, itemIndex, memo) {
     if (memo[cap][itemIndex]) {
-        // returns a knapsack
-        console.error('RETURN Knapsack: ', memo[cap][itemIndex]);
         return memo[cap][itemIndex];
     }
     if (cap === 0 || itemIndex < 0) {
-        console.log('RETURN.. - End -',);
         return { items: [], value: 0, weight: 0 };
     }
     if (cap < items[itemIndex].weight) {
-        return improved_knapsack(items, cap, itemIndex - 1, memo, 'cap < weight');
+        return improved_knapsack(items, cap, itemIndex - 1, memo);
     }
 
     const sackWithItem = improved_knapsack(
@@ -118,18 +62,11 @@ function improved_knapsack(items, cap, itemIndex, memo, option = '') {
         cap - items[itemIndex].weight,
         itemIndex - 1,
         memo,
-        'sackWithItem'
     );
-    const sackWithoutItem = improved_knapsack(items, cap, itemIndex - 1, memo, 'sackWithoutItem');
-
-    console.log("sack WITH Item", `[${itemIndex}] `, sackWithItem);
-    console.log("sack WITHOUT Item", `[${itemIndex}] `, sackWithoutItem);
+    const sackWithoutItem = improved_knapsack(items, cap, itemIndex - 1, memo);
 
     const valueWithItem = sackWithItem.value + items[itemIndex].value;
     const valueWithoutItem = sackWithoutItem.value;
-
-    console.log("valueWithItem", valueWithItem);
-    console.log("valueWithoutItem", valueWithoutItem);
 
     let resultSack;
 
@@ -139,18 +76,13 @@ function improved_knapsack(items, cap, itemIndex, memo, option = '') {
             value: sackWithItem.value + items[itemIndex].value,
             weight: sackWithItem.weight + items[itemIndex].weight,
         };
-
-        console.log("RETURN updatedSack", updatedSack);
         resultSack = updatedSack;
     } else {
-        console.log("RETURN sackWithoutItem", sackWithoutItem);
         resultSack = sackWithoutItem;
     }
 
     // update memo
     memo[cap][itemIndex] = resultSack;
-    console.log("memo", memo);
-
     return resultSack;
 }
 
@@ -167,7 +99,7 @@ function knapsack_memo(items, cap, index) {
     return improved_knapsack(items, cap, index, memo);
 }
 
-// console.log('knapsack_memo', knapsack_memo(items, maxWeight, items.length - 1));
+console.log('knapsack_memo', knapsack_memo(items, maxWeight, items.length - 1));
 // Time Complexity
 // without memoization: O(2^n)
 // with memoization: O(n*C)
