@@ -81,7 +81,6 @@ function getXPositions(n) {
 }
 
 function getYPositions(xPositions) {
-
     return xPositions.map(xPosition => {
         if (xPosition.length === 1) {
             return xPosition;
@@ -92,6 +91,7 @@ function getYPositions(xPositions) {
             group.push(xPosition[i]);
         }
 
+        // xPosition.reverse() is NOT working..
         return group;
     });
 }
@@ -111,6 +111,7 @@ function solution(n, r, c) {
     for (let i = 0; i < joinedXPositions.length; i++) {
         if (joinedXPositions[i] == r && joinedYPositions[i] == c) {
             result = i + 1;
+            break;
         }
     }
     return result || 'Not found';
