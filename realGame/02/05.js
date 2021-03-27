@@ -39,7 +39,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<Cards amount={4} />, rootElement);
 
 let row = document.getElementById("root").getElementsByTagName("tr")[0];
-console.log(row);
+
 if (row) {
     let cell = row.getElementsByTagName("td")[1];
     if (cell) {
