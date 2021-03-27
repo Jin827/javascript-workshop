@@ -1,5 +1,3 @@
-// React is loaded and is available as React and ReactDOM
-// imports should NOT be used
 const Cards = (props) => {
     const [cards, setCards] = React.useState(null);
 

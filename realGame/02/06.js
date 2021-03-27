@@ -1,5 +1,3 @@
-// React is loaded and is available as React and ReactDOM
-// imports should NOT be used
 const CommentList = (props) => {
     const [lists, setLists] = React.useState([]);
     const [inputValue, setInputValue] = React.useState('');

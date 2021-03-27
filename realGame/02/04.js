@@ -1,9 +1,7 @@
-// React is loaded and is available as React and ReactDOM
-// imports should NOT be used
 const ThemeContext = React.createContext();
 
 const Content = () => {
-    const context = React.useContext(ThemeContext); // change this
+    const context = React.useContext(ThemeContext);
     return (
         <section className={`theme-${context.theme}`}>
             <span>Current theme: {context.theme}</span>
