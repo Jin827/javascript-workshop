@@ -26,16 +26,18 @@ function findOccupiedPositions(box) {
     for (let x = box[0]; x <= box[2]; x++) {
         for (let y = box[1]; y <= box[3]; y++) {
 
-            if (!isPointer(x, y, box)) {
+            const isPointer =
+                x === box[0] && y === box[1] ||
+                x === box[0] && y === box[3] ||
+                x === box[2] && y === box[1] ||
+                x === box[2] && y === box[3];
+
+            if (!isPointer) {
                 result.push([x, y]);
             }
         }
     }
     return result;
-}
-
-function isPointer(x, y, box) {
-    return x === box[0] && y === box[1] || x === box[0] && y === box[3] || x === box[2] && y === box[1] || x === box[2] && y === box[3];
 }
 
 console.log(solution([

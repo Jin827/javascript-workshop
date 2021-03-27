@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Widgets</title>
+    <style>
+        .container {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: red;
+        }
+
+        .main {
+            width: 300px;
+        }
+
+        /* 수평이 될 요소들에 직접 float를 적용하고 그 요소들의 Container(부모 요소)에 미리 설정한 clearfix를 적용 */
+        .main::after {
+            content: "";
+            clear: both;
+            display: block;
+        }
+
+        .widget1 {
+            float: left;
+            width: 100px;
+            height: 75px;
+            background-color: yellow;
+        }
+
+        .content {
+            background-color: green;
+        }
+
+        .widget2 {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="widget1">Widget1</div>
+            <div class="content">
+                Content ... ... ... ... ... ... ... ... ... ... ... ... ...
+                ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+                ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+                ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+                ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+            </div>
+        </div>
+        <div class="widget2">Widget2</div>
+    </div>
+</body>
+
+</html>
