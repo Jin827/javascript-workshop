@@ -25,7 +25,7 @@ const CommentList = (props) => {
         </form>
         <ul>
             {lists && lists.length > 0 ? lists.map(list => (
-                <li key={list.id}>{list.value}</li>
+                <li key={`list-item${list.id}`}>{list.value}</li>
             )) : null}
         </ul>
     </div>);
