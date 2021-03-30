@@ -1,0 +1,30 @@
+<html>
+<style>
+    div {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+    }
+</style>
+
+<body>
+    <div class="one">
+        <div class="two">
+            <div class="three">
+            </div>
+        </div>
+    </div>
+    <script>
+        var divs = document.querySelectorAll('div');
+
+        function logEvent(event) {
+            console.log(event.currentTarget.className);
+        }
+
+        divs.forEach(div => {
+            div.addEventListener('click', logEvent);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<html>
+
+<body>
+    <div id="container">
+        <h1>오늘의 할 일</h1>
+        <ul class="itemList">
+            <li>
+                <input type="checkbox" class="item1">
+                <label for="item1">이벤트 버블링 학습</label>
+            </li>
+            <li>
+                <input type="checkbox" class="item2">
+                <label for="item2">이벤트 캡쳐 학습</label>
+            </li>
+        </ul>
+    </div>
+    <script>
+        const inputs = document.querySelectorAll('input');
+
+        // 새 리스트 아이템을 추가하는 코드
+        const itemList = document.querySelector('.itemList');
+        const li = document.createElement('li');
+        const input = document.createElement('input');
+        const label = document.createElement('label');
+        const labelText = document.createTextNode('이벤트 위임 학습');
+
+        input.setAttribute('type', 'checkbox');
+        input.setAttribute('class', 'item3');
+        label.setAttribute('for', 'item3');
+        label.appendChild(labelText);
+        li.appendChild(input);
+        li.appendChild(label);
+        itemList.appendChild(li);
+
+        // 인풋 박스에 클릭 이벤트 리스너를 추가하는 시점에서 리스트 아이템은 두 개이므로, 새롭게 추가된 리스트 아이템에는 클릭 이벤트 리스너가 등록되지 않는다.
+        inputs.forEach(function (input) {
+            input.addEventListener('click', function (event) {
+                alert(`${event.currentTarget.className} - clicked`);
+            });
+        });
+
+        // 인풋 박스의 상위 요소인 ul 태그에 이벤트 리스너를 달아놓고 하위에서 발생한 클릭 이벤트를 감지한다.
+        // itemList.addEventListener('click', function (event) {
+        //     alert(`${event.currentTarget.className} - clicked`);
+        // });
+    </script>
+</body>
+
+</html>

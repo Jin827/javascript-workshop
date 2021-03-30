@@ -1,0 +1,32 @@
+<html>
+<style>
+    div {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+    }
+</style>
+
+<body>
+    <div class="one">
+        <div class="two">
+            <div class="three">
+            </div>
+        </div>
+    </div>
+    <script>
+        var divs = document.querySelectorAll('div');
+
+        function logEvent(event) {
+            console.log(event.currentTarget.className);
+        }
+
+        divs.forEach(div => {
+            div.addEventListener('click', logEvent, {
+                capture: true // default 값은 false 이다.
+            });
+        });
+    </script>
+</body>
+
+</html>
