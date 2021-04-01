@@ -127,3 +127,86 @@ function getTime(s) {
     return times;
 }
 // console.log('getTime', getTime('BZA'));
+
+function solution(S, A) {
+    const message = [S[0]];
+    let index = A[0];
+
+    while (index !== 0) {
+        message.push(S[index]);
+        index = A[index];
+    }
+    return message.join('');
+}
+
+// console.log('solution', solution('cdeo', [3, 2, 0, 1]));
+
+function solution(A) {
+    const copied = A.sort((a, b) => a - b);
+    let steps = 0;
+
+    const biggestNo = copied[copied.length - 1];
+    const smallest = copied[0];
+    if (biggestNo === smallest) {
+        return steps;
+    }
+
+    let standardNo = (biggestNo - (smallest - 1)) / 2;
+    let smallNoCount = 0;
+    let bigNoCount = 0;
+
+    for (const no of copied) {
+        if (no === standardNo) {
+            continue;
+        }
+        else if (no < standardNo) {
+            smallNoCount += 1;
+        } else {
+            bigNoCount += 1;
+        }
+    }
+
+    const fixNo = Number.isInteger(standardNo) ? 1 : 0.5;
+
+    if ((smallNoCount === bigNoCount && !Number.isInteger(standardNo)) || (smallNoCount > bigNoCount)) {
+        standardNo -= fixNo;
+
+    } else if (smallNoCount < bigNoCount) {
+        standardNo += fixNo;
+    }
+
+    copied.forEach(no => steps += Math.abs(standardNo - no));
+    return steps;
+}
+// console.log('solution', solution([1, 2, 3, 5]));
+
+function solution(Str) {
+    const S = Str.split('');
+    const result = [];
+    let fixedIdx = 0;
+
+    while (fixedIdx < S.length) {
+        for (let outer = 0; outer < S.length; outer++) {
+            if (outer === fixedIdx) {
+                continue;
+            }
+
+            for (let inner = 0; inner <= 9; inner++) {
+                const copied = [...S];
+                copied[outer] = inner;
+                const joined = Number(copied.join(''));
+
+                if (joined % 3 === 0) {
+                    const exist = result.find(value => value === joined);
+
+                    if (exist === undefined) {
+                        result.push(joined);
+                    }
+                }
+            }
+        }
+        fixedIdx++;
+    }
+    return result.legnth;
+}
+console.log('solution', solution('0081'));
