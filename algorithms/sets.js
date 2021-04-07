@@ -38,10 +38,8 @@ console.log('cartesian', cartesian(colors, size, styles));  // [['blue','m], ...
 
 /* Permutations without Repetition */
 function looping(x, y) {
-    console.log("looping -> x, y", x, y);
     const store = [];
     for (let j = 0; j <= x.length; j++) {
-        console.log('store', x.splice(j, 0, y));
         store.push(x.splice(j, 0, y));
     }
     return store;

@@ -210,3 +210,28 @@ function solution(Str) {
     return result.legnth;
 }
 console.log('solution', solution('0081'));
+
+
+function generateRandomNumber(min, max) {
+    return Math.floor((Math.random() * (1 + max - min)) + min);
+}
+
+function randomArray(n) {
+    const array = [];
+    let object = {};
+    let index = 1;
+
+    while (index <= 2 * n + 1) { // O(n)
+        const randomNumber = generateRandomNumber(-100, 200);
+
+        // find if the value exists by checking the key in the object.
+        if (!object[randomNumber]) { // O(1)
+            array.push(randomNumber);
+            object[randomNumber] = true;
+            index += 1;
+        }
+    }
+    return array;
+}
+console.log('randomArray', randomArray(2));
+// O(n)
